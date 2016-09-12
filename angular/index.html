@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html ng-app="productReview">
+  <head>
+ <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css"></link>
+  </head>
+  </head>
+  <body ng-controller="ProductController as pro">
+    <!--  Products Container  -->
+    <div class="list-group">
+      <!--  Product Container  -->
+      <div class="list-group-item" ng-repeat="product in pro.products">
+        <h3>{{product.name}} </h3>
+
+         <section class="tab">
+        <ul class="nav nav-pills">
+          <li ng-class="{ active: tab.isSet(1)}">
+            <a href ng-click="tab.setTab(1)">Description</a></li>
+          <li ng-class="{ active: tab.isSet(2)}">
+            <a href ng-click="tab.setTab(2)">Specs</a></li>
+          <li ng-class="{ active: tab.isSet(3)}">
+            <a href ng-click="tab.setTab(3)">Reviews</a></li>
+        </ul>
+        <div ng-show="tab.isSet(1)">
+          <h4>Description</h4>
+          <blockquote>
+          <h3>{{product.category}}</h3>
+          <h3>{{product.model}}</h3>
+          <h3>{{product.price | currency}}</h3>
+          </blockquote>
+        </div>
+        <div ng-show="tab.isSet(2)">
+          <h4>Specs</h4>
+          <blockquote >
+          <ul class="clearfix">
+            <li ng-repeat="feature in product.features"> 
+                <h3>color:{{feature.color}} </h3>
+                <h3>memory:{{feature.memory}} </h3>
+                <h3>simSize:{{feature.simSize}} </h3>
+                <h3>screen:{{feature.screen}} </h3>
+            </li>
+          </ul></blockquote>
+        </div>
+        <div ng-show="tab.isSet(3)">
+          <h4>Reviews</h4>
+          <blockquote>
+           <h3>Review:{{product.rating}}</h3></blockquote>
+        </div>
+      </section>
+        <div class="gallery">
+          <img  class="img img-circle img-thumbnail center-block" ng-src="{{product.images[0]}}" style="max-width:300px; max-height:300px;" />
+          <ul class="clearfix">
+            <li class="small-image pull-left thumbnail" ng-repeat="image in product.images"> <img ng-src="{{image}}" style="max-width:200px; max-height:200px;"/> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
